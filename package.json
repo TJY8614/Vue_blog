@@ -4,10 +4,13 @@
   "description": "A Vue.js project",
   "author": "tjy",
   "private": true,
+  "homepage": "https://github.com/TJY8614/vue_blog.io",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "dependencies": {
     "axios": "^0.21.1",

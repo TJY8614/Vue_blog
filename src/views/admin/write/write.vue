@@ -122,7 +122,7 @@ export default {
   mounted: function() {
     if (this.$route.params.id) {
       axios
-        .get("http://localhost:3000/api/blogDetail/" + this.$route.params.id)
+        .get("http://localhost:3001/api/blogDetail/" + this.$route.params.id)
         .then(
           response => {
             let article = response.data;
@@ -210,7 +210,7 @@ export default {
           img:this.img,
         };
         axios
-          .post("http://localhost:3000/api/admin/updateBlog", {
+          .post("http://localhost:3001/api/admin/updateBlog", {
             articleInformation: obj
           })
           .then(
@@ -236,7 +236,7 @@ export default {
           labels: this.labels
         };
         axios
-          .post("http://localhost:3000/api/admin/saveBlog", {
+          .post("http://localhost:3001/api/admin/saveBlog", {
             articleInformation: obj
           })
           .then(

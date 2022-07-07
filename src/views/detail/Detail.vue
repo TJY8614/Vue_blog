@@ -34,7 +34,7 @@
 <script>
 import Top from "../../components/content/top/top";
 import axios from "axios";
-import marked from 'marked'
+import marked from "marked";
 import hljs from "highlight.js";
 import "highlight.js/styles/atom-one-dark.css"; //样式
 marked.setOptions({
@@ -54,7 +54,7 @@ export default {
   mounted: function() {
     let id = this.$route.params.id;
     axios
-      .get("http://localhost:3000/api/blogDetail/" + id)
+      .get("http://localhost:3001/api/blogDetail/" + id)
       .then(
         response => (this.article = response.data),
         response => console.log(response.data)
@@ -70,7 +70,7 @@ export default {
       return marked(this.article.content || "");
     },
     goback() {
-       this.$router.go(-1);
+      this.$router.go(-1);
     }
   }
 };

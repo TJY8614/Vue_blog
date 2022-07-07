@@ -54,45 +54,39 @@ export default {
         return;
       }
 
-      axios
-        .get("http://localhost:3000/api/admin/getUser/" + this.name)
-        .then(
-          response => {
-            if (_this.password !== response.data.password) {
-              _this.$message.error("用户名或密码不正确");
-            } else {
-              let obj = {
-                name: _this.name,
-                password: _this.password
-              };
-              axios
-                .post("http://localhost:3000/api/admin/signin", {
-                  userInfo: obj
-                })
-                .then(
-                  response => {
-                    _this.$message({
-                      message: "登录成功",
-                      type: "success"
-                    });
-                    // 1天过期，忽略大小写
-                    this.$cookies.set(
-                      "username",
-                      _this.name,
-                      "1d"
-                    );
-                    delete _this.password;
-                    _this.$router.push("/");
-                  },
-                  response => console.log("登录失败" + response)
-                );
-            }
-          },
-          response => {
-            _this.$message.error("该用户不存在");
-            return;
+      axios.get("http://localhost:3001/api/admin/getUser/" + this.name).then(
+        response => {
+          if (_this.password !== response.data.password) {
+            _this.$message.error("用户名或密码不正确");
+          } else {
+            let obj = {
+              name: _this.name,
+              password: _this.password
+            };
+            axios
+              .post("http://localhost:3001/api/admin/signin", {
+                userInfo: obj
+              })
+              .then(
+                response => {
+                  _this.$message({
+                    message: "登录成功",
+                    type: "success"
+                  });
+                  // 1天过期，忽略大小写
+                  this.$cookies.set("username", _this.name, "1d");
+                  delete _this.password;
+                  _this.$router.push("/");
+                },
+                response => console.log("登录失败" + response)
+              );
           }
-        );
+        },
+        response => {
+          _this.$message.error("该用户不存在");
+          return;
+        }
+      );
     }
   }
 };

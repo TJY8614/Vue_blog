@@ -5,25 +5,37 @@
       <div class="page">
         <div class="header">
           <h2>博客</h2>
-          <span class="total">共计{{total}}篇</span>
+          <span class="total">共计{{ total }}篇</span>
         </div>
         <div class="bd">
           <ul>
-            <li v-for="item in blogList" key="item._id" @click="BlogDetail(item._id)">
-                <div class="artical-item">
-                  <h3 class="title">{{item.title}}</h3>
-                  <p class="publish_date">发布于{{item.date}}</p>
-                  <span class="article_info_label">标签：
+            <li
+              v-for="item in blogList"
+              key="item._id"
+              @click="BlogDetail(item._id)"
+            >
+              <div class="artical-item">
+                <h3 class="title">{{ item.title }}</h3>
+                <p class="publish_date">发布于{{ item.date }}</p>
+                <span class="article_info_label"
+                  >标签：
                   <span v-if="item.labels.length === 0">未分类</span>
-                  <el-tag v-else class="tag_margin" type="primary" v-for="tag in item.labels" key="tag">{{ tag }}</el-tag>
-                  </span>
-                  <p class="artical-content">
-                    {{item.list}}
-                  </p>
-                </div>
-                <div class="pic">
-                  <img src="../../assets/img/bg1.png" alt="" />
-                </div>
+                  <el-tag
+                    v-else
+                    class="tag_margin"
+                    type="primary"
+                    v-for="tag in item.labels"
+                    key="tag"
+                    >{{ tag }}</el-tag
+                  >
+                </span>
+                <p class="artical-content">
+                  {{ item.list }}
+                </p>
+              </div>
+              <div class="pic">
+                <img src="../../assets/img/bg1.png" alt="" />
+              </div>
             </li>
           </ul>
         </div>
@@ -37,40 +49,39 @@
     >
     </el-pagination> -->
     </div>
-    
   </div>
 </template>
 
 <script>
-import Top from '../../components/content/top/top'
+import Top from "../../components/content/top/top";
 import axios from "axios";
 
 export default {
   data() {
-      return {
-        blogList: []
-      }
-    },
-    components: {
-      Top
-    },
-    computed: {
-        total: function(){
-          // 计算的总数
-          return this.blogList.length;
-        }
-      },
-    mounted: function () {
-      axios.get('http://localhost:3000/api/blogList').then(
-        response => this.blogList = response.data.reverse(),
-        response => console.log(response)
-      )
-    },
-    methods: {
-      BlogDetail: function (id) {
-        this.$router.push('/detail/' + id)
-      }
+    return {
+      blogList: []
+    };
+  },
+  components: {
+    Top
+  },
+  computed: {
+    total: function() {
+      // 计算的总数
+      return this.blogList.length;
     }
+  },
+  mounted: function() {
+    axios.get("http://localhost:3001/api/blogList").then(
+      response => (this.blogList = response.data.reverse()),
+      response => console.log(response)
+    );
+  },
+  methods: {
+    BlogDetail: function(id) {
+      this.$router.push("/detail/" + id);
+    }
+  }
 };
 </script>
 
@@ -104,14 +115,14 @@ export default {
   border: 1px solid #ccc;
   box-shadow: 0 4px 8px 6px rgba(7, 17, 27, 0.06);
 }
-.bd ul{
+.bd ul {
   width: 90%;
   margin: 0.2rem auto;
 }
 .bd ul li {
   display: inline-block;
   width: 5rem;
-  height:2.3rem;
+  height: 2.3rem;
   margin: 0.2rem;
   padding: 0.1rem;
   border: 1px solid #ccc;
@@ -119,7 +130,6 @@ export default {
   box-shadow: 0 4px 8px 6px rgba(7, 17, 27, 0.06);
   font-size: 0.2rem;
   cursor: pointer;
-
 }
 .bd .artical-item {
   float: left;

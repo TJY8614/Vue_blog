@@ -43,7 +43,7 @@ export default {
           return
         }
 
-        axios.get('http://localhost:3000/api/admin/getUser/' + this.name).then(
+        axios.get('http://localhost:3001/api/admin/getUser/' + this.name).then(
           response => {
             if (response.data.name === _this.name) {
               _this.$message.error('该用户已存在')
@@ -56,7 +56,7 @@ export default {
                 password: _this.password
               }
 
-              axios.post('http://localhost:3000/api/admin/signup', {
+              axios.post('http://localhost:3001/api/admin/signup', {
                 userInfo: obj
               }).then(
                 response => {
@@ -72,6 +72,7 @@ export default {
           },
           response => console.log(response)
         )
+      
       },
   }
 }
